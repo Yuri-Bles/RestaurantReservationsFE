@@ -1,5 +1,6 @@
-import { useState } from 'react'
 import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
+import Home from './pages/Home';
+import TableOverview from './pages/TableOverview';
 import './App.css'
 
 
@@ -10,19 +11,16 @@ function App() {
     <BrowserRouter>
       <nav>
         <Link to="/">Home</Link> |{" "}
+        <Link to="/TableOverview">Table Overview</Link> |{" "}
       </nav>
 
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/TableOverview" element={<TableOverview />} />
       </Routes>
     </BrowserRouter>
     </>
   )
-
-  function Home() 
-  {
-    return <h1>Home Page</h1>;
-  }
 }
 
 export default App
