@@ -1,0 +1,29 @@
+table {
+    width: 100%;
+    border-collapse: collapse;
+    border: 2px solid black;
+    background-color: #EEDCCB;
+    font-family: Georgia, serif;
+}
+
+th {
+    border: 2px solid black;
+    background-color: #C8AB83;
+    color: #463A4F;
+    padding: 12px;
+    text-align: center;
+}
+
+td {
+    padding: 12px;
+    border: 1px solid black;
+    color: #6D4C3D;
+}
+
+tbody tr:nth-child(even) {
+    background-color: #E2C6AC;
+}
+
+tbody tr:hover {
+    background-color: #CDC3D2;
+}

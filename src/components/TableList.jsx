@@ -1,3 +1,5 @@
+import "../styles/TableOverview/TableList.css";
+
 export default function TableList({ tables }) {
     return (
         <table>
