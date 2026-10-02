@@ -2,8 +2,9 @@
     margin-top: 10px;
     margin-right: 10px;
 
-    width: 30%;
-    max-width: 300px;
+    width: 100%;
+    max-width: 400px;
+    min-width: 100px;
 
     padding: 10px 10px;
     border: 1px solid #463A4F;
@@ -11,14 +12,17 @@
     font-size: 16px;
     font-family: Georgia, serif;
     outline: none;
+
+    box-sizing: border-box;
 }
 
 .numeric-up-down { 
     margin-top: 10px;
     margin-right: 10px;
 
-    width: 30%;
-    max-width: 300px;
+    width: 100%;
+    max-width: 400px;
+    min-width: 100px;
 
     padding: 10px 10px;
     border: 1px solid #463A4F;
@@ -26,4 +30,24 @@
     font-size: 16px;
     font-family: Georgia, serif;
     outline: none;
+
+    box-sizing: border-box;
+}
+
+.dropdown {
+    margin-top: 10px;
+    margin-right: 10px;
+
+    width: 100%;
+    max-width: 400px;
+    min-width: 100px;
+
+    padding: 10px 10px;
+    border: 1px solid #463A4F;
+    border-radius: 5px;
+    font-size: 16px;
+    font-family: Georgia, serif;
+    outline: none;
+
+    box-sizing: border-box;
 }

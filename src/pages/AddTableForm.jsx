@@ -3,6 +3,7 @@ import TableList from "../components/TableList.jsx";
 import PrimaryButton from "../components/PrimaryButton.jsx";
 import Textbox from "../components/Textbox.jsx";
 import NumericUpDown from "../components/NumericUpDown.jsx";
+import Dropdown from "../components/Dropdown.jsx";
 import TableService from "../services/TableService.jsx";
 import "../styles/page.css";
 
@@ -16,11 +17,17 @@ export default function AddTableForm() {
         <div className="page">
             <h1 className="title">Add Table Form</h1>
             <div>
+                <h4 className="subtitle">Table Number</h4>
+            </div>
+            <div>
                 <Textbox 
                     value={tableNumber} 
                     onChange={(event) => setTableNumber(event.target.value)} 
                     placeholder="Table number" 
                 />
+            </div>
+            <div>
+                <h4 className="subtitle">Capacity</h4>
             </div>
             <div>
                 <NumericUpDown 
@@ -37,10 +44,17 @@ export default function AddTableForm() {
                     max={20} />
             </div>
             <div>
-                <Textbox 
-                    value={tableStatus} 
-                    onChange={(event) => setTableStatus(event.target.value)} 
-                    placeholder="Table number" 
+                <h4 className="subtitle">Status</h4>
+            </div>
+            <div>
+                <Dropdown
+                    value={tableStatus}
+                    onChange={(event) => setTableStatus(event.target.value)}
+                    placeholder="Select status"
+                    options={[
+                        { value: "Active", label: "Active" },
+                        { value: "Inactive", label: "Inactive" }
+                    ]}
                 />
             </div>
         </div>
