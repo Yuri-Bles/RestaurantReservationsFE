@@ -4,6 +4,7 @@ import PrimaryButton from "../components/PrimaryButton.jsx";
 import Textbox from "../components/Textbox.jsx";
 import NumericUpDown from "../components/NumericUpDown.jsx";
 import Dropdown from "../components/Dropdown.jsx";
+import ErrorMessage from "../components/ErrorMessage.jsx";
 import TableService from "../services/TableService.jsx";
 import "../styles/page.css";
 
@@ -11,6 +12,7 @@ export default function AddTableForm() {
     const [tableNumber, setTableNumber] = useState("");
     const [tableCapacity, setTableCapacity] = useState(1);
     const [tableStatus, setTableStatus] = useState("");
+    const [statusError, setStatusError] = useState("");
 
     return (
     <>
@@ -57,6 +59,12 @@ export default function AddTableForm() {
                     ]}
                 />
             </div>
+            <div>
+                <ErrorMessage message={statusError} />
+            </div>
+                <PrimaryButton onClick={() => setStatusError("Error")}>
+                    Error
+                </PrimaryButton>
         </div>
     </>
   )

@@ -27,7 +27,7 @@ export default function TableOverview() {
         <div className="page">
             <h1 className="title">Table Overview Page</h1>
             <Link to={"/TableOverview/Add"}>
-                <PrimaryButton onClick={() => console.log("Hit")}>
+                <PrimaryButton>
                     Add
                 </PrimaryButton>
             </Link>
