@@ -10,7 +10,9 @@ import "../styles/page.css";
 
 export default function AddTableForm() {
     const [tableNumber, setTableNumber] = useState("");
+    const [tableNumberError, setTableNumberError] = useState("");
     const [tableCapacity, setTableCapacity] = useState(1);
+    const [capacityError, setCapacityError] = useState("");
     const [tableStatus, setTableStatus] = useState("");
     const [statusError, setStatusError] = useState("");
 
@@ -27,6 +29,9 @@ export default function AddTableForm() {
                     onChange={(event) => setTableNumber(event.target.value)} 
                     placeholder="Table number" 
                 />
+            </div>
+            <div>
+                <ErrorMessage message={tableNumberError} />
             </div>
             <div>
                 <h4 className="subtitle">Capacity</h4>
@@ -46,6 +51,9 @@ export default function AddTableForm() {
                     max={20} />
             </div>
             <div>
+                <ErrorMessage message={capacityError} />
+            </div>
+            <div>
                 <h4 className="subtitle">Status</h4>
             </div>
             <div>
@@ -62,9 +70,9 @@ export default function AddTableForm() {
             <div>
                 <ErrorMessage message={statusError} />
             </div>
-                <PrimaryButton onClick={() => setStatusError("Error")}>
-                    Error
-                </PrimaryButton>
+            <PrimaryButton onClick={() => setTableNumberError("Error")}>
+                Submit
+            </PrimaryButton>
         </div>
     </>
   )
