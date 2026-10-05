@@ -95,6 +95,54 @@ export default function UpdateTableForm() {
         }
     };
 
+    const deleteTable = async () => {
+        if (tableNumber == null)
+        {
+            setSubmitError(`This table doesn't exist`);
+            return;
+        }
+
+        let response = null;
+
+        const table = {
+            tableNumber: tableNumber
+        };
+
+        try {
+            response = await TableService.deleteTable(table);
+
+            if (response === null) { 
+                setSubmitError(`Something went wrong internally, try again later`);
+                return;
+            }
+            else if (response.status != 200) {
+                setSubmitError(`Something went wrong internally, try again later. ${response.status}: ${response.data.message}`);
+                return;
+            }
+            navigate("/TableOverview");
+        }
+        catch (error) {
+            console.log("FULL ERROR:", error);
+            console.log("ERROR RESPONSE:", error.response);
+            console.log("ERROR RESPONSE DATA:", error.response?.data);
+            console.log("ERROR RESPONSE DATA TYPE:", typeof error.response?.data);
+
+
+            if (error.response?.status === 400) {
+                setSubmitError(`Incorrect values. ${error.response.status}: ${error.response.data.message}`);
+                return;
+            }
+            else if (error.response != null)
+            {
+                setSubmitError(`Something went wrong. ${error.response.status}: ${error.response.data.message}`);
+                return;
+            }
+            setSubmitError(`Something went wrong.`);
+
+            console.error("Failed to delete table:", error);
+        }
+    }
+
     return (
     <>
         <div className="page">
@@ -154,6 +202,15 @@ export default function UpdateTableForm() {
             </div>
             <PrimaryButton onClick={() => updateTable()}>
                 Update Table
+            </PrimaryButton>
+            <PrimaryButton
+                onClick={() => {
+                    if (window.confirm("Are you sure you want to delete this table?")) {
+                        deleteTable();
+                    }
+                }}
+            >
+                Delete Table
             </PrimaryButton>
         </div>
     </>
