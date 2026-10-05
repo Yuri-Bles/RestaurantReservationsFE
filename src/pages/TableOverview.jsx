@@ -14,7 +14,6 @@ export default function TableOverview() {
         TableService.getTables()
             .then((data) => 
             {
-                console.log(data);
                 setTables(data.body);
             })
             .catch((error) => 
@@ -33,7 +32,9 @@ export default function TableOverview() {
                 </PrimaryButton>
             </Link>
             {selectedTable ? (
-                <Link to={`/TableOverview/Update/${selectedTable.tableNumber}`}>
+                <Link to={`/TableOverview/Update/${selectedTable.tableNumber}`}
+                    state={{ table: selectedTable }}
+                >
                     <PrimaryButton>
                         Update
                     </PrimaryButton>

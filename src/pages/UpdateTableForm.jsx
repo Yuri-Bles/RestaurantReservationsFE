@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams, useNavigate, useLocation } from 'react-router-dom';
 import PrimaryButton from "../components/PrimaryButton.jsx";
 import Textbox from "../components/Textbox.jsx";
 import NumericUpDown from "../components/NumericUpDown.jsx";
@@ -10,14 +10,17 @@ import "../styles/page.css";
 
 export default function UpdateTableForm() {
     const navigate = useNavigate();
-    
+
+    const location = useLocation();
+    const table = location.state?.table;
+
     const { tableNumber } = useParams();
 
-    const [newTableNumber, setNewTableNumber] = useState("");
+    const [newTableNumber, setNewTableNumber] = useState(table?.tableNumber ?? "");
     const [tableNumberError, setTableNumberError] = useState("");
-    const [tableCapacity, setTableCapacity] = useState(1);
+    const [tableCapacity, setTableCapacity] = useState(table?.capacity ?? 1);
     const [capacityError, setCapacityError] = useState("");
-    const [tableStatus, setTableStatus] = useState("Active");
+    const [tableStatus, setTableStatus] = useState(table?.status ?? "Active");
     const [statusError, setStatusError] = useState("");
     const [submitError, setSubmitError] = useState("");
 
