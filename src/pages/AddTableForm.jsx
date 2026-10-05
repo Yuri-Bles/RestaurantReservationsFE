@@ -75,6 +75,12 @@ export default function AddTableForm() {
                 setSubmitError(`Incorrect values. ${error.response.status}: ${error.response.data.message}`);
                 return;
             }
+            else if (error.response != null)
+            {
+                setSubmitError(`Something went wrong. ${error.response.status}: ${error.response.data.message}`);
+                return;
+            }
+            setSubmitError(`Something went wrong.`);
 
             console.error("Failed to add table:", error);
         }
