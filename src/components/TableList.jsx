@@ -1,9 +1,7 @@
 import { useState } from "react";
 import "../styles/TableOverview/TableList.css";
 
-export default function TableList({ tables }) {
-    const [selectedTable, setSelectedTable] = useState(null);
-    
+export default function TableList({ tables, selectedTable, onSelect }) {
     return (
         <table>
             <thead>
@@ -18,7 +16,7 @@ export default function TableList({ tables }) {
                 {tables.map((table) => (
                     <tr
                         key={table.tableNumber}
-                        onClick={() => setSelectedTable(table)}
+                        onClick={() => onSelect(table)}
                         className={
                             selectedTable?.tableNumber === table.tableNumber
                                 ? "selected"

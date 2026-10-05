@@ -7,6 +7,7 @@ import "../styles/page.css";
 
 export default function TableOverview() {
     const [tables, setTables] = useState([]);
+    const [selectedTable, setSelectedTable] = useState(null);
 
     useEffect(() => 
     {
@@ -31,8 +32,22 @@ export default function TableOverview() {
                     Add
                 </PrimaryButton>
             </Link>
+            {selectedTable ? (
+                <Link to={`/TableOverview/Update/${selectedTable.tableNumber}`}>
+                    <PrimaryButton>
+                        Update
+                    </PrimaryButton>
+                </Link>
+            ) : (
+                <PrimaryButton disabled>
+                    Update
+                </PrimaryButton>
+            )}
             <div>
-                <TableList tables={tables} />
+                <TableList tables={tables}
+                    selectedTable={selectedTable}
+                    onSelect={setSelectedTable} 
+                />
             </div>
         </div>
     </>

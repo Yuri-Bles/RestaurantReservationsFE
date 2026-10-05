@@ -12,3 +12,9 @@
     font-size: 16px;
     cursor: pointer;
 }
+
+.primary-button:disabled {
+    color: #675675;
+    background-color: #ddd5e0;
+    cursor: not-allowed;
+}
