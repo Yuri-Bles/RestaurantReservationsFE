@@ -63,6 +63,7 @@ export default function AddTableForm() {
                 setSubmitError(`Something went wrong internally, try again later. ${response.status}: ${response.data.message}`);
                 return;
             }
+            navigate("/TableOverview");
         }
         catch (error) {
             console.log("FULL ERROR:", error);
@@ -143,11 +144,9 @@ export default function AddTableForm() {
             <div>
                 <ErrorMessage message={submitError} />
             </div>
-            <Link to={"/TableOverview"}>
-                <PrimaryButton onClick={() => addTable()}>
-                    Add Table
-                </PrimaryButton>
-            </Link>
+            <PrimaryButton onClick={() => addTable()}>
+                Add Table
+            </PrimaryButton>
         </div>
     </>
   )
