@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import TableList from "../components/TableList.jsx";
+import { Link } from 'react-router-dom';
 import PrimaryButton from "../components/PrimaryButton.jsx";
 import Textbox from "../components/Textbox.jsx";
 import NumericUpDown from "../components/NumericUpDown.jsx";
@@ -13,8 +13,72 @@ export default function AddTableForm() {
     const [tableNumberError, setTableNumberError] = useState("");
     const [tableCapacity, setTableCapacity] = useState(1);
     const [capacityError, setCapacityError] = useState("");
-    const [tableStatus, setTableStatus] = useState("");
+    const [tableStatus, setTableStatus] = useState("Active");
     const [statusError, setStatusError] = useState("");
+    const [submitError, setSubmitError] = useState("");
+
+    const addTable = async () => {
+        setTableNumberError("");
+        setCapacityError("");
+        setStatusError("");
+        setSubmitError("");
+
+        let hasError = false;
+
+        if (!tableNumber.trim()) {
+            setTableNumberError("Table number is required.");
+            hasError = true;
+        }
+
+        if (!tableCapacity || tableCapacity < 1 || tableCapacity > 20) {
+            setCapacityError("Capacity must be between 1 and 20.");
+            hasError = true;
+        }
+
+        if (!tableStatus) {
+            setStatusError("Please select a status.");
+            hasError = true;
+        }
+
+        if (hasError) {
+            return;
+        }
+
+        const table = {
+            tableNumber: tableNumber.trim(),
+            capacity: Number(tableCapacity),
+            status: tableStatus
+        };
+
+        let response = null;
+
+        try {
+            response = await TableService.createTable(table);
+
+            if (response === null) { 
+                setSubmitError(`Something went wrong internally, try again later`);
+                return;
+            }
+            else if (response.status != 201) {
+                setSubmitError(`Something went wrong internally, try again later. ${response.status}: ${response.data.message}`);
+                return;
+            }
+        }
+        catch (error) {
+            console.log("FULL ERROR:", error);
+            console.log("ERROR RESPONSE:", error.response);
+            console.log("ERROR RESPONSE DATA:", error.response?.data);
+            console.log("ERROR RESPONSE DATA TYPE:", typeof error.response?.data);
+
+
+            if (error.response?.status === 400) {
+                setSubmitError(`Incorrect values. ${error.response.status}: ${error.response.data.message}`);
+                return;
+            }
+
+            console.error("Failed to add table:", error);
+        }
+    };
 
     return (
     <>
@@ -70,9 +134,14 @@ export default function AddTableForm() {
             <div>
                 <ErrorMessage message={statusError} />
             </div>
-            <PrimaryButton onClick={() => setTableNumberError("Error")}>
-                Submit
-            </PrimaryButton>
+            <div>
+                <ErrorMessage message={submitError} />
+            </div>
+            <Link to={"/TableOverview"}>
+                <PrimaryButton onClick={() => addTable()}>
+                    Add Table
+                </PrimaryButton>
+            </Link>
         </div>
     </>
   )
