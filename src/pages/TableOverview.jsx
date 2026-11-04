@@ -6,7 +6,7 @@ import TableService from "../services/TableService.jsx";
 import "../styles/page.css";
 
 export default function TableOverview() {
-    const [tables, setTables] = useState([]);
+    const [tables, setTables] = useState();
     const [selectedTable, setSelectedTable] = useState(null);
 
     useEffect(() => 
@@ -14,6 +14,7 @@ export default function TableOverview() {
         TableService.getTables()
             .then((data) => 
             {
+                console.log("Received data:", data);
                 setTables(data.body);
             })
             .catch((error) => 

@@ -1,7 +1,7 @@
 import { useState } from "react";
 import "../styles/TableOverview/TableList.css";
 
-export default function TableList({ tables, selectedTable, onSelect }) {
+export default function TableList({ tables = [], selectedTable, onSelect }) {
     return (
         <table>
             <thead>
