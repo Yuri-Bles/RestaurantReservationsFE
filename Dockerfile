@@ -4,6 +4,6 @@ WORKDIR /usr/share/nginx/html
 
 COPY artifact/ .
 
-EXPOSE 5173
+EXPOSE 80
 
 ENTRYPOINT ["nginx", "-g", "daemon off;"]

@@ -3,5 +3,5 @@ services:
     image: ${FRONTEND_IMAGE}:main
     build: .
     ports:
-      - "5174:5173"
+      - "5174:80"
     restart: unless-stopped
