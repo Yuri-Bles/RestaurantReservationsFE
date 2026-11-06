@@ -1,0 +1,7 @@
+services:
+  frontend:
+    image: ${FRONTEND_IMAGE}:main
+    build: .
+    ports:
+      - "5174:5173"
+    restart: unless-stopped
