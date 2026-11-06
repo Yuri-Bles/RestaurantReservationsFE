@@ -1,7 +1,9 @@
 import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
+import Navbar from './components/NavBar';
 import Home from './pages/Home';
 import TableOverview from './pages/TableOverview';
-import './App.css'
+import AddTableForm from './pages/AddTableForm';
+import UpdateTableForm from './pages/UpdateTableForm';
 
 
 function App() {
@@ -9,14 +11,13 @@ function App() {
   return (
     <>
     <BrowserRouter>
-      <nav>
-        <Link to="/">Home</Link> |{" "}
-        <Link to="/TableOverview">Table Overview</Link> |{" "}
-      </nav>
+      <Navbar/>
 
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/TableOverview" element={<TableOverview />} />
+        <Route path="/TableOverview/Add" element={<AddTableForm />} />
+        <Route path="/TableOverview/Update/:tableNumber" element={<UpdateTableForm />} />
       </Routes>
     </BrowserRouter>
     </>
