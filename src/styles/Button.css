@@ -18,3 +18,22 @@
     background-color: #ddd5e0;
     cursor: not-allowed;
 }
+
+.navbar-button {
+    color: #463A4F;
+    background-color: transparent;
+
+    padding: 5px 5px;
+
+    border: none;
+    border-radius: 5px;
+    font-family: Georgia, serif;
+    font-size: 20px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.navbar-button:disabled {
+    color: #675675;
+    cursor: not-allowed;
+}

@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import '../styles/navbar.css';
 import logo from '../assets/LogoTransparent.png';
+import NavbarButton from "../components/NavbarButton.jsx";
 
 function Navbar() {
     return (
@@ -8,9 +9,21 @@ function Navbar() {
         <Link to="/">
           <img src={logo} alt="Restaurant_Logo" />
         </Link>
-        <Link to="/">Home</Link> |{" "}
-        <Link to="/TableOverview">Table Overview</Link> |{" "}
-        <Link to="/Reservation">Make Reservation</Link>{" "}
+        <Link to={"/"}>
+            <NavbarButton>
+                Home
+            </NavbarButton>
+        </Link> |
+        <Link to={"/TableOverview"}>
+            <NavbarButton>
+                Table Overview
+            </NavbarButton>
+        </Link> |
+        <Link to={"/Reservation"}>
+            <NavbarButton>
+                Make Reservation
+            </NavbarButton>
+        </Link>
       </nav>
     );
 }
