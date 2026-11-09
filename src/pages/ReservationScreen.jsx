@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { useEffect, useState } from "react";
-import TableList from "../components/TableList.jsx";
+import TableList from "../components/ShortTableList.jsx";
 import PrimaryButton from "../components/PrimaryButton.jsx";
 import TableService from "../services/TableService.jsx";
 import "../styles/page.css";
