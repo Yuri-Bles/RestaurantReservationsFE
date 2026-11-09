@@ -14,7 +14,6 @@ export default function TableOverview() {
         TableService.getTables()
             .then((data) => 
             {
-                console.log("Received data:", data);
                 setTables(data.body);
             })
             .catch((error) => 

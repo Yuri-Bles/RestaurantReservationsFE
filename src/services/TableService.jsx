@@ -2,10 +2,17 @@ import axios, { HttpStatusCode } from "axios";
 
 const BASE_URL = import.meta.env.VITE_API_URL;
 const TABLE_URL = `${BASE_URL}/tables`;
+const ACTIVE_TABLE_URL = `${TABLE_URL}/active`;
 
 const TableRequest = {
     async getTables() {
         const response = await axios.get(TABLE_URL);
+        const responseData = response.data;
+        return responseData;
+    },
+
+    async getActiveTables() {
+        const response = await axios.get(ACTIVE_TABLE_URL);
         const responseData = response.data;
         return responseData;
     },

@@ -9,7 +9,8 @@ function Navbar() {
           <img src={logo} alt="Restaurant_Logo" />
         </Link>
         <Link to="/">Home</Link> |{" "}
-        <Link to="/TableOverview">Table Overview</Link>{" "}
+        <Link to="/TableOverview">Table Overview</Link> |{" "}
+        <Link to="/Reservation">Make Reservation</Link>{" "}
       </nav>
     );
 }
