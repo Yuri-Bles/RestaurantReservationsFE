@@ -5,6 +5,7 @@ import TableOverview from './pages/TableOverview';
 import AddTableForm from './pages/AddTableForm';
 import UpdateTableForm from './pages/UpdateTableForm';
 import ReservationScreen from './pages/ReservationScreen';
+import RegisterPage from './pages/RegisterPage';
 
 
 function App() {
@@ -16,6 +17,7 @@ function App() {
 
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/Register" element={<RegisterPage />} />
         <Route path="/Reservation" element={<ReservationScreen />} />
         <Route path="/TableOverview" element={<TableOverview />} />
         <Route path="/TableOverview/Add" element={<AddTableForm />} />

@@ -3,3 +3,11 @@
     font-family: Georgia, serif;
     margin: 20px;
 }
+
+.container {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    width: 100%;
+    min-width: 0;
+}
