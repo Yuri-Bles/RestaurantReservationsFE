@@ -135,8 +135,8 @@ export default function AddTableForm() {
                     onChange={(event) => setTableStatus(event.target.value)}
                     placeholder="Select status"
                     options={[
-                        { value: "Active", label: "Active" },
-                        { value: "Inactive", label: "Inactive" }
+                        { value: "ACTIVE", label: "Active" },
+                        { value: "INACTIVE", label: "Inactive" }
                     ]}
                 />
             </div>
