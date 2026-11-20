@@ -1,10 +1,14 @@
 import { useState } from "react";
+import { useNavigate } from 'react-router-dom';
+import UserService from "../services/UserService.jsx";
 import "../styles/LoginAndRegister/Form.css"
 import "../styles/page.css";
 import "../styles/Input.css";
 import "../styles/Button.css";
 
 export default function RegisterPage() {
+  const navigate = useNavigate();
+
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -43,6 +47,47 @@ export default function RegisterPage() {
     if (repeatPassword != password) {
       setRepeatPasswordError("Passwords don't match");
       hasError = true;
+    }
+
+    if (hasError) {
+        return;
+    }
+
+    const user = {
+      name: name.trim(),
+      email: email.trim(),
+      password: password.trim()
+    };
+
+    try {
+      const response = await UserService.createUser(user);
+
+      if (response === null) { 
+          setSubmitError(`Something went wrong internally, try again later`);
+          return;
+      }
+      else if (response.status != 201) {
+          setSubmitError(`Something went wrong internally, try again later. ${response.status}: ${response.data.message}`);
+          return;
+      }
+
+      navigate("/");
+    } 
+    catch (error) {
+      console.log("FULL ERROR:", error);
+
+      if (error.response?.status === 400) {
+          setSubmitError(`Incorrect values. ${error.response.status}: ${error.response.data.message}`);
+          return;
+      }
+      else if (error.response != null)
+      {
+          setSubmitError(`Something went wrong. ${error.response.status}: ${error.response.data.message}`);
+          return;
+      }
+      setSubmitError(`Something went wrong.`);
+
+      console.error("Failed to create account:", error);
     }
   }
 
