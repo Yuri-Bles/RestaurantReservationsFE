@@ -6,31 +6,31 @@ const ACTIVE_TABLE_URL = `${TABLE_URL}/active`;
 
 const TableRequest = {
     async getTables() {
-        const response = await axios.get(TABLE_URL);
+        const response = await axios.get(TABLE_URL, {withCredentials: true});
         const responseData = response.data;
         return responseData;
     },
 
     async getActiveTables() {
-        const response = await axios.get(ACTIVE_TABLE_URL);
+        const response = await axios.get(ACTIVE_TABLE_URL, {withCredentials: true});
         const responseData = response.data;
         return responseData;
     },
 
     async createTable(table) {
-        const response = await axios.post(TABLE_URL, table);
+        const response = await axios.post(TABLE_URL, table, {withCredentials: true});
         return response;
     },
 
     async updateTable(table) {
-        const response = await axios.put(TABLE_URL, table);
+        const response = await axios.put(TABLE_URL, table, {withCredentials: true});
         return response;
     },
 
     async deleteTable(table) {
         const response = await axios.delete(TABLE_URL, {
             data: table
-        });
+        }, {withCredentials: true});
 
         return response;
     }
