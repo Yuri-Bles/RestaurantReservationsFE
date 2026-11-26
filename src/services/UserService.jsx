@@ -33,7 +33,13 @@ const UserRequest = {
     // },
 
     async createUser(user) {
-        const response = await axios.post(USER_URL, user);
+        const csrfToken = await this.getCsrfToken();
+        const response = await axios.post(USER_URL, user, {
+            withCredentials: true,
+            headers: {
+                "X-XSRF-TOKEN": csrfToken
+            }
+        });
         return response;
     },
 

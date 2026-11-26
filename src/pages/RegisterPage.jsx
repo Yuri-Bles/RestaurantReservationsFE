@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from 'react-router-dom';
+import { useAuth } from "../contexts/AuthContext";
 import UserService from "../services/UserService.jsx";
 import "../styles/LoginAndRegister/Form.css"
 import "../styles/page.css";
@@ -8,6 +9,7 @@ import "../styles/Button.css";
 
 export default function RegisterPage() {
   const navigate = useNavigate();
+  const { checkAuthentication } = useAuth();
 
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -19,6 +21,16 @@ export default function RegisterPage() {
   const [passwordError, setPasswordError] = useState("");
   const [repeatPasswordError, setRepeatPasswordError] = useState("");
   const [submitError, setSubmitError] = useState("");
+
+const registerAndLogin = async () => {
+    const registered = await register();
+
+    if (!registered) {
+        return;
+    }
+
+    await login();
+}
 
   const register = async () => {
     setNameError("");
@@ -50,7 +62,7 @@ export default function RegisterPage() {
     }
 
     if (hasError) {
-        return;
+        return false;
     }
 
     const user = {
@@ -64,12 +76,51 @@ export default function RegisterPage() {
 
       if (response === null) { 
           setSubmitError(`Something went wrong internally, try again later`);
-          return;
+          return false;
       }
       else if (response.status != 201) {
           setSubmitError(`Something went wrong internally, try again later. ${response.status}: ${response.data.message}`);
+          return false;
+      }
+    } 
+    catch (error) {
+      console.log("FULL ERROR:", error);
+
+      if (error.response?.status === 400) {
+          setSubmitError(`Incorrect values. ${error.response.status}: ${error.response.data.message}`);
+          return false;
+      }
+      else if (error.response != null)
+      {
+          setSubmitError(`Something went wrong. ${error.response.status}: ${error.response.data.message}`);
+          return false;
+      }
+      setSubmitError(`Something went wrong.`);
+
+      console.error("Failed to create account:", error);
+    }
+    return true;
+  }
+
+  const login = async () => {
+    const user = {
+      email: email.trim(),
+      password: password.trim()
+    };
+
+    try {
+      const response = await UserService.login(user);
+
+      if (response === null) { 
+          setSubmitError(`Something went wrong internally, try again later`);
           return;
       }
+      else if (response.status != 200) {
+          setSubmitError(`Something went wrong internally, try again later. ${response.status}: ${response.data.message}`);
+          return;
+      }
+
+      await checkAuthentication();
 
       navigate("/");
     } 
@@ -87,7 +138,7 @@ export default function RegisterPage() {
       }
       setSubmitError(`Something went wrong.`);
 
-      console.error("Failed to create account:", error);
+      console.error("Failed to login:", error);
     }
   }
 
@@ -161,7 +212,7 @@ export default function RegisterPage() {
               </p>
             </div>
             <div className="container container_center">
-              <button className="primary-button" onClick={register}>
+              <button className="primary-button" onClick={registerAndLogin}>
                 Register
               </button>
             </div>
